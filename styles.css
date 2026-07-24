@@ -531,24 +531,26 @@ textarea, input, select { font-family:var(--font); }
 
 /* Hero staggered entry */
 .h-anim {
-    opacity: 0;
-    transform: translateY(44px);
-    filter: blur(5px);
+    opacity: 1;
+    transform: none;
+    filter: none;
     animation: fadeUpBlur .95s cubic-bezier(0.16,1,0.3,1) var(--d,0s) both;
     will-change: opacity, transform, filter;
 }
 .h-vis {
-    opacity: 0;
-    transform: translateX(60px) scale(0.95);
-    filter: blur(10px);
+    opacity: 1;
+    transform: none;
+    filter: none;
     animation: slideLeftScale 1.1s cubic-bezier(0.16,1,0.3,1) 1.0s both;
     will-change: opacity, transform, filter;
 }
 
 @keyframes fadeUpBlur {
+    from { opacity:0; transform:translateY(44px); filter:blur(5px); }
     to { opacity:1; transform:translateY(0); filter:blur(0); }
 }
 @keyframes slideLeftScale {
+    from { opacity:0; transform:translateX(60px) scale(0.95); filter:blur(10px); }
     to { opacity:1; transform:translateX(0) scale(1); filter:blur(0); }
 }
 
@@ -1011,6 +1013,15 @@ section[id] { scroll-margin-top: var(--nav-h); }
 
 /* Scroll reveal */
 .reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: opacity .88s cubic-bezier(0.16,1,0.3,1),
+                transform .88s cubic-bezier(0.16,1,0.3,1),
+                filter .55s var(--ease);
+    transition-delay: var(--delay, 0s);
+}
+.reveal.reveal-ready {
     opacity: 0;
     transform: translateY(58px);
     filter: blur(6px);
@@ -1020,17 +1031,17 @@ section[id] { scroll-margin-top: var(--nav-h); }
     transition-delay: var(--delay, 0s);
     will-change: opacity, transform, filter;
 }
-.reveal.visible { opacity:1; transform:none; filter:blur(0); }
+.reveal.reveal-ready.visible { opacity:1; transform:none; filter:blur(0); }
 
-.reveal.reveal-left  { transform:translateX(-64px); }
-.reveal.reveal-right { transform:translateX(64px); }
-.reveal.reveal-scale { transform:scale(0.86) translateY(30px); filter:blur(8px); }
-.reveal.reveal-zoom  { transform:scale(0.68); filter:blur(12px); }
+.reveal.reveal-ready.reveal-left  { transform:translateX(-64px); }
+.reveal.reveal-ready.reveal-right { transform:translateX(64px); }
+.reveal.reveal-ready.reveal-scale { transform:scale(0.86) translateY(30px); filter:blur(8px); }
+.reveal.reveal-ready.reveal-zoom  { transform:scale(0.68); filter:blur(12px); }
 
-.reveal.reveal-left.visible,
-.reveal.reveal-right.visible,
-.reveal.reveal-scale.visible,
-.reveal.reveal-zoom.visible  { opacity:1; transform:none; filter:blur(0); }
+.reveal.reveal-ready.reveal-left.visible,
+.reveal.reveal-ready.reveal-right.visible,
+.reveal.reveal-ready.reveal-scale.visible,
+.reveal.reveal-ready.reveal-zoom.visible  { opacity:1; transform:none; filter:blur(0); }
 
 /* ═══════════════════════════════════════════
    ESPECIALIDADES
@@ -1646,7 +1657,7 @@ section[id] { scroll-margin-top: var(--nav-h); }
 ═══════════════════════════════════════════ */
 
 /* Catalog cards — drop from above with tilt */
-.col-card.reveal {
+.col-card.reveal.reveal-ready {
     transition: none;
     transform: translateY(-52px) scale(0.91) rotate(1.6deg);
     filter: blur(8px);
@@ -1660,7 +1671,7 @@ section[id] { scroll-margin-top: var(--nav-h); }
 }
 
 /* Benefit cards — bounce up with scale */
-.ben-card.reveal {
+.ben-card.reveal.reveal-ready {
     transition: none;
     transform: scale(0.74) translateY(42px);
     filter: blur(10px);
@@ -1674,7 +1685,7 @@ section[id] { scroll-margin-top: var(--nav-h); }
 }
 
 /* Testimonial cards — 3D perspective rise */
-.testi-card.reveal {
+.testi-card.reveal.reveal-ready {
     transition: none;
     transform: perspective(800px) rotateX(24deg) translateY(32px);
     filter: blur(7px);
@@ -1688,7 +1699,7 @@ section[id] { scroll-margin-top: var(--nav-h); }
 }
 
 /* Stat items — spring zoom in */
-.stat-item.reveal {
+.stat-item.reveal.reveal-ready {
     transition: none;
     transform: scale(0.40);
     filter: blur(14px);
@@ -1702,7 +1713,7 @@ section[id] { scroll-margin-top: var(--nav-h); }
 }
 
 /* Process steps — stagger bounce from below */
-.process-step.reveal {
+.process-step.reveal.reveal-ready {
     transition: none;
     transform: translateY(54px) scale(0.85);
     filter: blur(8px);

@@ -216,7 +216,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, { rootMargin: '0px 0px -80px 0px', threshold: 0.08 });
 
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => {
+        el.classList.add('reveal-ready');
+        revealObserver.observe(el);
+    });
 
     /* ═══════════════════════════════════════════
        6. COUNTER ANIMATION
