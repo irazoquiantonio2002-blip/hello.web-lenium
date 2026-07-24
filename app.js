@@ -5,8 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     ═══════════════════════════════════════════ */
     const loader = document.getElementById('loader');
     let pctTick = null;
+    let loaderHidden = false;
 
-    const loaderBar = loader.querySelector('.loader-bar');
+    const loaderBar = loader?.querySelector('.loader-bar');
     if (loaderBar) {
         const pctEl = document.createElement('span');
         pctEl.className = 'loader-pct';
@@ -26,6 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (twEl) twEl.textContent = '';
 
     const hideLoader = () => {
+        if (loaderHidden || !loader) return;
+        loaderHidden = true;
         if (pctTick) { clearInterval(pctTick); pctTick = null; }
         if (loaderBar) {
             const pctEl = loaderBar.querySelector('.loader-pct');
@@ -39,13 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
             loader.remove();
         };
         loader.addEventListener('transitionend', onEnd);
+        setTimeout(() => loader.remove(), 1200);
     };
 
-    if (document.readyState === 'complete') {
-        setTimeout(hideLoader, 1600);
-    } else {
-        window.addEventListener('load', () => setTimeout(hideLoader, 1600));
-    }
+    // El contenido ya está disponible en DOMContentLoaded. No esperamos a que
+    // terminen recursos externos para evitar que el loader bloquee la página.
+    setTimeout(hideLoader, 1100);
 
     /* ═══════════════════════════════════════════
        2. NAVBAR SCROLL
