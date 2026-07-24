@@ -1,0 +1,9 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "milenium-mapro-site",
+  "compatibility_date": "2026-07-23",
+  "main": "./worker/index.js",
+  "assets": {
+    "binding": "ASSETS"
+  }
+}
